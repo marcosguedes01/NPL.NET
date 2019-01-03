@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\marcos.guedes\\Documents\\Visual Studio 2017\\Projects\\NER_Example\\NER_Library.Tests\\NER_Library.Tests.csproj",
+  "TargetFramework": "v4.6.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}
