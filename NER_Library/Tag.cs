@@ -36,6 +36,11 @@ namespace NER_Library
             return GetHash().Equals((obj as Tag).GetHash());
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         private string GetHash()
         {
             return string.Concat(startIndex, endIndex, category);

@@ -22,14 +22,6 @@ namespace NER_Library.Tests
         }
 
         [Test]
-        public void ShouldReturnsSentences()
-        {
-            NLPLib nlp = new NLPLib();
-            string[] sentences = nlp.SentDetect(TEXT);
-            Assert.Contains("The turnout figure had previously been contested.", sentences);
-        }
-
-        [Test]
         public void ShouldReturnsSentencesPosDetect()
         {
             NLPLib nlp = new NLPLib();

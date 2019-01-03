@@ -1,10 +1,10 @@
 ﻿using java.io;
-using opennlp.tools.chunker;
 using opennlp.tools.postag;
 using opennlp.tools.sentdetect;
 using opennlp.tools.tokenize;
 using opennlp.tools.util;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 /*
@@ -14,6 +14,7 @@ namespace NER_Library
 {
     public class NLPLib
     {
+        private const string PATH_MODELS_NPL = @"C:\OpenNPL\Models\";
         private List<Tag> lstTags;
 
         public NLPLib()
@@ -23,7 +24,7 @@ namespace NER_Library
 
         public List<Tag> GetTags(string paragraph)
         {
-            InputStream bin = new FileInputStream(@"C:\OpenNPL\Models\en-pos-maxent.bin");
+            var bin = GetFileStream("en-pos-maxent.bin");
             POSModel model = new POSModel(bin);
             POSTagger tagger = new POSTaggerME(model);
 
@@ -54,25 +55,10 @@ namespace NER_Library
 
             return tagsResult;
         }
-
-        public string[] SentDetect(string paragraph)
-        {
-            // always start with a model, a model is learned from training data
-            InputStream bin = new FileInputStream(@"C:\OpenNPL\Models\en-sent.bin");
-            SentenceModel model = new SentenceModel(bin);
-            SentenceDetectorME sdetector = new SentenceDetectorME(model);
-
-            string[] sentences = sdetector.sentDetect(paragraph);
-
-            bin.close();
-
-            return sentences;
-        }
-
+        
         public Span[] SentPosDetect(string paragraph)
         {
-            // always start with a model, a model is learned from training data
-            InputStream bin = new FileInputStream(@"C:\OpenNPL\Models\en-sent.bin");
+            var bin = GetFileStream("en-sent.bin");
             SentenceModel model = new SentenceModel(bin);
             SentenceDetectorME sdetector = new SentenceDetectorME(model);
 
@@ -85,8 +71,7 @@ namespace NER_Library
 
         public Span[] GetTokens(string paragraph)
         {
-            // always start with a model, a model is learned from training data
-            InputStream bin = new FileInputStream(@"C:\OpenNPL\Models\en-token.bin");
+            var bin = GetFileStream("en-token.bin");
             TokenizerModel model = new TokenizerModel(bin);
             TokenizerME tokenizer = new TokenizerME(model);
 
@@ -97,17 +82,9 @@ namespace NER_Library
             return tokens;
         }
 
-        public Span[] GetChunker(string[] tokens, string[] tags)
+        private FileInputStream GetFileStream(string fileName)
         {
-            InputStream bin = new FileInputStream(@"C:\OpenNPL\Models\en-chunker.bin");
-            ChunkerModel model = new ChunkerModel(bin);
-            ChunkerME tokenizer = new ChunkerME(model);
-
-            Span[] result = tokenizer.chunkAsSpans(tokens, tags);
-
-            bin.close();
-
-            return result;
+            return new FileInputStream(Path.Combine(PATH_MODELS_NPL, fileName));
         }
     }
 }
