@@ -1,6 +1,11 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
-using System.IO;
+
+/*
+ * Models download: http://opennlp.sourceforge.net/models-1.5/
+ * Fontes: http://seanglover.com/blog/2012/08/extracting-noun-phrases-with-contextual-relevance-in-net-using-opennlp/
+ *         https://www.programcreek.com/2012/05/opennlp-tutorial/
+ */
 
 namespace NER_Library.Tests
 {
